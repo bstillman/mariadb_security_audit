@@ -1,5 +1,31 @@
 #!/bin/bash
 
+# Authors: Ben Stillman <ben@mariadb.com>
+# License: GNU General Public License, version 3.
+# Redistribution/Reuse of this code is permitted under the GNU v3 license.
+# As an additional term ALL code must carry the original Author(s) credit in comment form.
+# See LICENSE in this directory for the integral text.
+
+
+
+####################################
+# Functions
+
+# Handle control-c
+function sigint {
+  echo "SIGINT detected. Exiting."
+  username=
+  password=
+  # 130 is the standard exit code for SIGINT
+  exit 130
+}
+
+####################################
+# Begin script
+
+# we trap control-c
+trap sigint INT
+
 # Header
 echo ""
 echo ""
@@ -143,7 +169,7 @@ if [ "$have_symlink" != 'DISABLED' ] ; then
     echo ""
     echo ""
     echo "######################################################"
-    echo "#                Skip Name Resolve                   #"
+    echo "#                Disable Symlinks                    #"
     echo "######################################################"
     echo ""
     echo "Symlinks are currently enabled. It is recommended to "
