@@ -178,8 +178,8 @@ if [ "$have_symlink" != 'DISABLED' ] ; then
 fi
 
 # bind address
-bind_address_cnt=$(cat /etc/my.cnf.d/* | grep "bind" | wc -l)
-if [ "$bind_address_cnt" -eq 0 ] ; then
+bind_address=$(/usr/sbin/mysqld --help --verbose | grep "bind-address " | grep "bind-address" | awk '{ print $2 }')
+if [ "$bind_address" == "(No" ] ; then
     echo ""
     echo ""
     echo "######################################################"
